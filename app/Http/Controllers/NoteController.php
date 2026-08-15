@@ -26,8 +26,12 @@ class NoteController extends Controller
     public function store(Request $request)
     {
          $validated = $request->validate([
-             'note'=> 'required|string|max:255'
-         ]);
+             'note'=> 'required|string|max:255|min:1'
+         ], [
+            'note.required' => 'Please write something to note!',
+            'note.max' => 'Note must be 255 characters or less.',
+            'note.min' => 'Note must have something inside.',
+        ]);
 
          Note::create([
              'note' => $validated['note'],
