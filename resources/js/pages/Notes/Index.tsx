@@ -62,8 +62,8 @@ export default function Index({ notes }: { notes: Note[] }) {
                 </form>
 
                 <ul className='space-y-3'>
-                    {notes.map((note) => (
-                        <NoteCard id={note.id} text={note.note} onEdit={() => startEdit(note)} />
+                    {notes.map((note, index) => (
+                        <NoteCard key={`note-${index}`} id={note.id} text={note.note} onEdit={() => startEdit(note)} />
                     ))}
                 </ul>
             </div>
