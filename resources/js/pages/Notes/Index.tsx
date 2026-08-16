@@ -57,7 +57,7 @@ export default function Index({ notes }: { notes: Note[] }) {
 
                     <NoteButton text={editingNote ? 'update' : 'add'} type='submit' disabled={processing} />
                     {editingNote && (
-                        <NoteButton text="cancel edit" variant='outline' type='submit' disabled={processing} />
+                        <NoteButton text="cancel edit" variant='outline' type='button' onClick={cancelEdit} disabled={processing} />
                     )}
                 </form>
 
