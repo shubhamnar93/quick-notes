@@ -30,13 +30,13 @@ export default function Index({ notes }: { notes: Note[] }) {
 
         if (editingNote) {
             // Updating an existing note
-            put(`/notes/${editingNote.id}`, {
+            put(`/${editingNote.id}`, {
                 preserveScroll: true,
                 onSuccess: () => cancelEdit(),
             });
         } else {
             // Adding a new note
-            post('/notes', {
+            post('/', {
                 preserveScroll: true,
                 onSuccess: () => reset('note'),
             });
