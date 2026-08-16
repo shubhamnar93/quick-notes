@@ -5,7 +5,7 @@ import { NoteCardProp } from '@/types';
 export const NoteCard = ({ text, onEdit, id }: NoteCardProp) => {
     const handleDelete = () => {
         if (confirm('Are you sure you want to delete this note?')) {
-            router.delete(`/${id}`, {
+            router.delete(`/notes/${id}`, {
                 preserveScroll: true,
             });
         }
