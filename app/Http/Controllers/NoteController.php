@@ -15,7 +15,7 @@ class NoteController extends Controller
     public function index()
     {
         $notes = Note::latest()->get();
-        return inertia('Notes/Index', [
+        return inertia::render('Notes/Index', [
                 'notes' => $notes,
         ]);
     }
@@ -36,23 +36,28 @@ class NoteController extends Controller
          Note::create([
              'note' => $validated['note'],
          ]);
-         return redirect('/notes')->with('success', 'note created!');
+         return redirect('/')->with('success', 'note created!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validate = $request->validate([
+            "note"=> 'required|string|max:255|min:1'
+        ] , [
+            'note.required' => 'Please write something to note!',
+            'note.max' => 'Note must be 255 characters or less.',
+            'note.min' => 'Note must have something inside.',
+        ]);
+        $note = Note::findOrFail($id);
+         $note->update([
+             'note' => $validate['note'],
+         ]);
+
+         return redirect('/')->with('success', 'note updated!');
     }
 
     /**
@@ -60,6 +65,9 @@ class NoteController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
+        $note = Note::findOrFail($id);
+        $note->delete();
+        return redirect('/')->with('success', 'note deleted!');
     }
 }

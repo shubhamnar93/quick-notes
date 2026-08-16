@@ -1,10 +1,8 @@
 import { cn } from "@/lib/utils"
+import { NoteButtonProp } from "@/types"
 
-type NoteButtonProp = { text: string, type?: "button" | "submit" | "reset" | undefined, variant?: "primary" | "outline" }
-
-
-export const NoteButton = ({ text, type, variant = "primary" }: NoteButtonProp) => {
+export const NoteButton = ({ text, type, variant = "primary", disabled }: NoteButtonProp) => {
     return (
-        <button type={type} className={cn("rounded-md bg-black text-white px-4 py-2 text-sm font-medium", variant == "primary" && "bg-indigo-950")} > {text}</button >
+        <button disabled={disabled} type={type} className={cn("rounded-md bg-black text-white px-4 py-2 text-sm font-medium", variant == "primary" && "bg-indigo-950")} > {text}</button >
     )
 }
